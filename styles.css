@@ -1,0 +1,80 @@
+/* Flying Birds - styles.css
+   Beginner-friendly styling and simple wing animation */
+* { box-sizing: border-box; }
+html,body { height:100%; margin:0; font-family: system-ui,Segoe UI,Arial; background: linear-gradient(#87ceeb, #b3e5fc); }
+.game {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+}
+.bird {
+  position: absolute;
+  left: 10%;
+  top: 40%;
+  width: 48px;
+  height: 34px;
+  background: #ffcc00;
+  border-radius: 30% 30% 30% 30%;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.15);
+  transform-origin: center;
+  animation: flap 300ms steps(2) infinite;
+}
+.bird::after {
+  /* simple wing */
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 8px;
+  width: 18px;
+  height: 18px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 50%;
+}
+@keyframes flap {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(0) rotate(-4deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+.pipe {
+  position: absolute;
+  width: 60px;
+  background: #2e7d32;
+  border-radius: 6px;
+}
+.pipe.top { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.pipe.bottom { border-top-left-radius: 0; border-top-right-radius: 0; }
+.score {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255,255,255,0.7);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.message {
+  position: absolute;
+  inset: 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(0,0,0,0.35);
+}
+.message.hidden { display:none; }
+.message-inner {
+  background: white;
+  padding: 18px 24px;
+  border-radius: 8px;
+  text-align:center;
+}
+#restart { cursor:pointer; }
+
+/* Small screens */
+@media (max-width:600px){ .bird{ width:36px; height:26px;} .pipe{ width:48px; } }
+
+/* Helper: visually center content when testing */
+.game:focus { outline: none; }
